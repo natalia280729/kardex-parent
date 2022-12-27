@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	 xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/jpa
+    	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+    	<context:property-placeholder location="classpath:application.properties" />
+    	<jpa:repositories base-package="com.todouno.kardex.persistence.*" />
+        
+		<bean id="stockService" class="com.todouno.kardexsystem.service.impl.StockServiceImpl">
+      	  <property name="stockManager" ref="stockManager"></property>
+		</bean>
+		<bean id="productService" class="com.todouno.kardexsystem.service.impl.ProductServiceImpl">
+      	  <property name="productManager" ref="productManager"></property>
+		</bean>
+		
+		<bean id="productManager" class="com.todouno.kardex.manager.impl.ProductManagerImpl">
+      	  <property name="productRepository" ref="productRepository"></property>
+      	  <property name="stockManager" ref="stockManager"></property>
+      	  <property name="salesManager" ref="salesManager"></property>
+      	  <property name="salesStockManager" ref="salesStockManager"></property>
+		</bean>
+		
+		<bean id="stockManager" class="com.todouno.kardex.manager.impl.StockManagerImpl">
+      	  <property name="stockRepository" ref="stockRepository"></property>
+		</bean>
+		
+		<bean id="salesManager" class="com.todouno.kardex.manager.impl.SalesManagerImpl">
+      	  <property name="salesRepository" ref="salesRepository"></property>
+		</bean>
+		<bean id="salesStockManager" class="com.todouno.kardex.manager.impl.SalesStockManagerImpl">
+      	  <property name="salesStockRepository" ref="salesStockRepository"></property>
+		</bean>
+		
+		
+        
+        </beans>
